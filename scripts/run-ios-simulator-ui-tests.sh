@@ -166,11 +166,21 @@ xcrun simctl launch --terminate-running-process "$UDID" "$BUNDLE_ID"
 DATA_CONTAINER="$(xcrun simctl get_app_container \
   "$UDID" "$BUNDLE_ID" data)"
 DIAGNOSTICS="$DATA_CONTAINER/Documents/SimulatorHostDiagnostics.json"
-for _ in $(seq 1 40); do
+for _ in $(seq 1 120); do
   [[ -s "$DIAGNOSTICS" ]] && break
-  sleep 0.25
+  sleep 0.5
 done
-test -s "$DIAGNOSTICS"
+if [[ ! -s "$DIAGNOSTICS" ]]; then
+  xcrun simctl spawn "$UDID" log show \
+    --style compact \
+    --last 5m \
+    --predicate 'process == "SimulatorHost"' \
+    > "$ARTIFACTS/SimulatorHost-launch.log" 2>&1 || true
+  xcrun simctl io "$UDID" screenshot \
+    "$ARTIFACTS/SimulatorHost-launch-failure.png" || true
+  echo "SimulatorHost diagnostics were not produced" >&2
+  exit 1
+fi
 
 cp "$DIAGNOSTICS" \
   "$ARTIFACTS/SimulatorHostDiagnostics.json"

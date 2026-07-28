@@ -147,6 +147,8 @@ class SettingsUISourceTests(unittest.TestCase):
         self.assertIn("data/modules.json", script)
         self.assertIn("simctl", script)
         self.assertIn("SimulatorHostDiagnostics.json", script)
+        self.assertIn("seq 1 120", script)
+        self.assertIn("SimulatorHost-launch.log", script)
         self.assertIn('data.get("glass_effect_count", 0) < 2', script)
         self.assertIn('data.get("glass_backdrop_count", 0) < 2', script)
         self.assertIn("simulator-ui", workflow)
