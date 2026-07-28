@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-07-27T23:10:00+08:00",
+  "official": {
+    "stable_version": "8.0.75",
+    "store_url": "https://apps.apple.com/cn/app/%E5%BE%AE%E4%BF%A1/id414478124",
+    "candidate_quarantine_version": "8.0.76"
+  },
+  "sites": [
+    {
+      "name": "iPA Park",
+      "url": "https://www.ipapark.com/51883.html",
+      "access": "public-metadata"
+    },
+    {
+      "name": "晴天网盘",
+      "url": "https://alist.jiejingfan.vip/%E5%BE%AE%E4%BF%A1/%E5%A4%9A%E5%8A%9F%E8%83%BD",
+      "access": "public-download"
+    },
+    {
+      "name": "道乐",
+      "url": "https://daole.net/category/%E5%BE%AE%E4%BF%A1",
+      "access": "public-metadata"
+    },
+    {
+      "name": "IPA Store",
+      "url": "https://ipa.store/3073",
+      "access": "public-metadata"
+    },
+    {
+      "name": "Telegram iosjumo",
+      "url": "https://t.me/iosjumo",
+      "access": "public-index"
+    },
+    {
+      "name": "Telegram adbk_backup",
+      "url": "https://t.me/adbk_backup",
+      "access": "public-index"
+    }
+  ],
+  "samples": [
+    {
+      "id": "qingtian-8075-unpacked-only",
+      "version": "8.0.75",
+      "kind": "unpacked-only",
+      "source": "晴天网盘",
+      "filename": "微信_8.0.75_仅砸壳.ipa",
+      "page_url": "https://alist.jiejingfan.vip/%E5%BE%AE%E4%BF%A1/%E7%A0%B8%E5%A3%B3/%E5%BE%AE%E4%BF%A1_8.0.75_%E4%BB%85%E7%A0%B8%E5%A3%B3.ipa",
+      "listed_size": "341.68M",
+      "status": "acquired"
+    },
+    {
+      "id": "qingtian-8075-windproof2",
+      "version": "8.0.75",
+      "kind": "multi-function",
+      "source": "晴天网盘",
+      "filename": "微信_8.0.75防风版2.ipa",
+      "page_url": "https://alist.jiejingfan.vip/%E5%BE%AE%E4%BF%A1/%E5%A4%9A%E5%8A%9F%E8%83%BD/%E5%BE%AE%E4%BF%A1_8.0.75%E9%98%B2%E9%A3%8E%E7%89%882.ipa",
+      "listed_size": "403.32M",
+      "status": "acquired"
+    },
+    {
+      "id": "qingtian-8075-multiopen-windproof",
+      "version": "8.0.75",
+      "kind": "multi-open",
+      "source": "晴天网盘",
+      "filename": "微信_8.0.75多开防风.ipa",
+      "page_url": "https://alist.jiejingfan.vip/%E5%BE%AE%E4%BF%A1/%E5%A4%9A%E5%8A%9F%E8%83%BD/%E5%BE%AE%E4%BF%A1_8.0.75%E5%A4%9A%E5%BC%80%E9%98%B2%E9%A3%8E.ipa",
+      "listed_size": "403.08M",
+      "status": "acquired"
+    },
+    {
+      "id": "qingtian-8075-theme",
+      "version": "8.0.75",
+      "kind": "theme",
+      "source": "晴天网盘",
+      "filename": "微信_8.0.75美化版.ipa",
+      "page_url": "https://alist.jiejingfan.vip/%E5%BE%AE%E4%BF%A1/%E5%A4%9A%E5%8A%9F%E8%83%BD/%E5%BE%AE%E4%BF%A1_8.0.75%E7%BE%8E%E5%8C%96%E7%89%88.ipa",
+      "listed_size": "433.28M",
+      "status": "acquired"
+    },
+    {
+      "id": "ipapark-8075-15in1",
+      "version": "8.0.75",
+      "kind": "15-in-1",
+      "source": "iPA Park",
+      "filename": "页面未公开直链",
+      "page_url": "https://www.ipapark.com/51883.html",
+      "status": "metadata-only"
+    },
+    {
+      "id": "telegram-hbb-912-guanti",
+      "version": "8.0.75",
+      "kind": "HBB-9.1.2-guanti",
+      "source": "Telegram iosjumo",
+      "filename": "WeChat_8075_官替_免费版_v912.ipa",
+      "status": "metadata-only"
+    },
+    {
+      "id": "telegram-hbb-912-mm-qy-wx",
+      "version": "8.0.75",
+      "kind": "HBB-9.1.2-variants",
+      "source": "Telegram iosjumo",
+      "filename": "WeChat_8075_{MM,QY,WX}_免费版_v912.ipa",
+      "status": "metadata-only"
+    },
+    {
+      "id": "telegram-wezone-102",
+      "version": "8.0.75",
+      "kind": "WeZone-1.0.2",
+      "source": "Telegram adbk_backup",
+      "filename": "WeChat_8.0.75_微隔离专版.ipa",
+      "status": "metadata-only"
+    },
+    {
+      "id": "candidate-8076",
+      "version": "8.0.76",
+      "kind": "claimed-beta",
+      "source": "multiple",
+      "filename": "typed-slot:IPA_FILENAME",
+      "status": "quarantine"
+    },
+    {
+      "id": "regression-8074",
+      "version": "8.0.74",
+      "kind": "regression",
+      "source": "historical",
+      "filename": "typed-slot:IPA_FILENAME",
+      "status": "metadata-only"
+    },
+    {
+      "id": "regression-8073",
+      "version": "8.0.73",
+      "kind": "regression",
+      "source": "historical",
+      "filename": "typed-slot:IPA_FILENAME",
+      "status": "metadata-only"
+    }
+  ]
+}

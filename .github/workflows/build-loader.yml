@@ -1,0 +1,84 @@
+name: build-loader
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Run unit tests
+        shell: pwsh
+        run: |
+          $env:PYTHONPATH = "src"
+          python -m unittest discover -s tests -v
+
+  build:
+    runs-on: macos-26-intel
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.2.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build arm64 iOS loader
+        run: bash scripts/build-loader.sh dist/WeChatMods.dylib
+      - uses: actions/upload-artifact@v4
+        with:
+          name: WeChatMods-ios-arm64
+          path: |
+            dist/WeChatMods.dylib
+            dist/WeChatMods.dylib.provenance.json
+          if-no-files-found: error
+
+  icon:
+    runs-on: macos-26-intel
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.2.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile iOS 26.2 Liquid Glass icon
+        run: |
+          mkdir -p dist/icon-compiled
+          xcodebuild -version
+          xcrun actool assets/AppIcon.icon \
+            --compile dist/icon-compiled \
+            --platform iphoneos \
+            --minimum-deployment-target 15.0 \
+            --app-icon AppIcon \
+            --target-device iphone \
+            --target-device ipad \
+            --output-partial-info-plist dist/icon-partial-info.plist
+          plutil -p dist/icon-partial-info.plist
+          test -s dist/icon-compiled/Assets.car
+          xcrun assetutil --info dist/icon-compiled/Assets.car \
+            > dist/icon-assetutil.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AppIcon-liquid-glass-ios26
+          path: |
+            dist/icon-compiled/Assets.car
+            dist/icon-partial-info.plist
+            dist/icon-assetutil.json
+          if-no-files-found: error
+
+  simulator-ui:
+    runs-on: macos-26-intel
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.2.app/Contents/Developer
+      TARGET_DEVICE_NAME: iPhone 17 Pro Max
+      TARGET_RUNTIME_VERSION: "26.2"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and run no-account iOS 26 UI fixture
+        run: bash scripts/run-ios-simulator-ui-tests.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ios26-simulator-ui-evidence
+          path: reports/simulator-ui
+          if-no-files-found: error

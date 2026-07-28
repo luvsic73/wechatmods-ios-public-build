@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wechat-ipa-audit"
+version = "0.1.0"
+description = "Reproducible inventory, static audit, diff, and packaging tools for iOS IPA research."
+requires-python = ">=3.10"
+dependencies = [
+  "Pillow>=10,<13",
+]
+
+[project.scripts]
+wechat-ipa-audit = "wechat_ipa_audit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
