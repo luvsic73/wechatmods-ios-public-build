@@ -15,7 +15,7 @@ if (-not (Test-Path -LiteralPath $provenancePath -PathType Leaf)) {
     throw "Loader provenance is missing: $provenancePath"
 }
 
-py -3 -m wechat_ipa_audit.cli verify-loader-provenance `
+py -3 -m wechat_ipa_audit.loader_provenance verify-loader-provenance `
     $loaderPath $provenancePath
 if ($LASTEXITCODE -ne 0) {
     throw (

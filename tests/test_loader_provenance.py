@@ -71,6 +71,10 @@ class LoaderProvenanceTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         build = (root / "scripts" / "build-loader.sh").read_text(encoding="utf-8")
         self.assertIn("write-loader-provenance", build)
+        self.assertIn(
+            "-m wechat_ipa_audit.loader_provenance",
+            build,
+        )
         for script_name in (
             "build-iloader.ps1",
             "build-coexist.ps1",

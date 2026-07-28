@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import argparse
 import hashlib
+import json
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -84,3 +86,48 @@ def verify_loader_provenance(
         "current_loader_sha256": _sha256(loader_path),
         "current_sources": current_sources,
     }
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="loader-provenance")
+    commands = parser.add_subparsers(dest="command", required=True)
+    write = commands.add_parser("write-loader-provenance")
+    write.add_argument("loader")
+    write.add_argument("output")
+    verify = commands.add_parser("verify-loader-provenance")
+    verify.add_argument("loader")
+    verify.add_argument("provenance")
+    verify.add_argument("--output")
+    args = parser.parse_args(argv)
+    project_root = Path(__file__).resolve().parents[2]
+    if args.command == "write-loader-provenance":
+        result = build_loader_provenance(
+            args.loader,
+            project_loader_sources(project_root),
+        )
+        output = Path(args.output)
+    else:
+        provenance = json.loads(
+            Path(args.provenance).read_text(encoding="utf-8")
+        )
+        result = verify_loader_provenance(
+            args.loader,
+            provenance,
+            project_loader_sources(project_root),
+        )
+        output = Path(args.output) if args.output else None
+    rendered = json.dumps(
+        result,
+        ensure_ascii=False,
+        indent=2,
+        sort_keys=True,
+    ) + "\n"
+    if output is None:
+        print(rendered, end="")
+    else:
+        output.write_text(rendered, encoding="utf-8")
+    return 0 if result.get("valid", True) else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

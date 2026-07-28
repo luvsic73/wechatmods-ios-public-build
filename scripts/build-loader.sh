@@ -40,7 +40,7 @@ xcrun --sdk iphoneos clang \
 codesign --force --sign - "$OUTPUT"
 file "$OUTPUT"
 codesign --display --verbose=2 "$OUTPUT"
-PYTHONPATH="$ROOT/src" python3 -m wechat_ipa_audit.cli \
+PYTHONPATH="$ROOT/src" python3 -m wechat_ipa_audit.loader_provenance \
   write-loader-provenance \
   "$OUTPUT" \
   "$OUTPUT.provenance.json"
